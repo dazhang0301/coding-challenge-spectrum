@@ -13,7 +13,7 @@ services:
       - ./frontend/src:/usr/app/src
       - ./frontend/public:/usr/app/public
     depends_on:
-      - server
+      - backend
     environment:
       - REACT_APP_SERVER=http://localhost:5000
       - CHOKIDAR_USEPOLLING=true
@@ -21,16 +21,16 @@ services:
     stdin_open: true
     tty: true
   
-  server:
+  backend:
     build:
-      context: ./server
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - 5000:5000
     networks:
       - mern-network
     volumes:
-      - ./server/src:/usr/app/src
+      - ./backend/src:/usr/app/src
     depends_on:
       - db
     environment:
